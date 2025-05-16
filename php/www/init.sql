@@ -1,0 +1,5 @@
+CREATE TABLE IF NOT EXISTS utilisateurs (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    US_login VARCHAR(50) NOT NULL,
+    US_password VARCHAR(255) NOT NULL
+);

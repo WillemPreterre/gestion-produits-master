@@ -1,0 +1,54 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    container_name: php-app
+    ports:
+      - "8080:80"  # Application PHP accessible via http://localhost:8080
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: gestion_produits
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: rootpassword
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./initdb:/docker-entrypoint-initdb.d
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: myadmin
+    ports:
+      - "8081:80"  # phpMyAdmin accessible via http://localhost:8081
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+
+  pgsql:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: gestion_produits_pg
+      POSTGRES_USER: pguser
+      POSTGRES_PASSWORD: pgpassword
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  db_data:
+  pg_data:
