@@ -1,8 +1,8 @@
 <?php
-    $host = "db";
-    $username = "user";
-    $password = "password";
-    $db = "gestion_produits";
+    $host = "pgdb";
+    $username = "pguser";
+    $password = "pgpassword";
+    $db = "pggestion_produits";
 
     // Connexion avec pdo mysql
     $db = new PDO("mysql:host=$host;dbname=$db", $username, $password);
