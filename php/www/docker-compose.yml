@@ -36,19 +36,5 @@ services:
     depends_on:
       - db
 
-  pgsql:
-    image: postgres:15
-    container_name: postgres-db
-    restart: always
-    environment:
-      POSTGRES_DB: gestion_produits_pg
-      POSTGRES_USER: pguser
-      POSTGRES_PASSWORD: pgpassword
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-
 volumes:
   db_data:
-  pg_data:
